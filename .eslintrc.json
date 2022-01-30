@@ -37,8 +37,7 @@
           }
         ],
         "no-underscore-dangle": "off",
-        "max-len": "off",
-        "camelcase": ["error", {"properties": "never"}]
+        "max-len": "off"
       }
     },
     {
