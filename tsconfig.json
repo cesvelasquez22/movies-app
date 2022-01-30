@@ -14,7 +14,8 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@services": ["src/app/services"]
+      "@services": ["src/app/services"],
+      "@pipes": ["src/app/pipes"]
     }
   },
   "angularCompilerOptions": {

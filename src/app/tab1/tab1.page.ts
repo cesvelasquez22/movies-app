@@ -8,6 +8,10 @@ import { Movie } from '../interfaces/movie.interfaces';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit {
+  slidesOptions = {
+    slidesPerView: 1.1,
+    freeMode: true,
+  };
   latestMovies: Movie[] = [];
 
   constructor(private _moviesService: MoviesService) {}
