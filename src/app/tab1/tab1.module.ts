@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { PipesModule } from '@pipes';
+import { ComponentsModule } from '@components';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { PipesModule } from '@pipes';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
     PipesModule,
+    ComponentsModule
   ],
   declarations: [Tab1Page],
 })

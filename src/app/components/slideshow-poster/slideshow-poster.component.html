@@ -1,0 +1,5 @@
+<ion-slides [options]="slidesOptions">
+  <ion-slide *ngFor="let movie of movies">
+    <app-slide [movie]="movie" pathType="poster_path"></app-slide>
+  </ion-slide>
+</ion-slides>
