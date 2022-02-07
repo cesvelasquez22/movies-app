@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Movie } from 'src/app/interfaces/movie.interfaces';
+import { Movie } from '@interfaces';
 
 @Component({
   selector: 'app-slideshow-poster',
@@ -9,6 +9,7 @@ import { Movie } from 'src/app/interfaces/movie.interfaces';
 export class SlideshowPosterComponent implements OnInit {
   @Input() title = '';
   @Input() movies: Movie[] = [];
+  
   slidesOptions = {
     slidesPerView: 3.3,
     freeMode: true,

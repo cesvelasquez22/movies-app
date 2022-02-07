@@ -2,17 +2,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Movie } from '@interfaces';
 
 @Component({
-  selector: 'app-slideshow-backdrop',
-  templateUrl: './slideshow-backdrop.component.html',
-  styleUrls: ['./slideshow-backdrop.component.scss'],
+  selector: 'app-slideshow-col',
+  templateUrl: './slideshow-col.component.html',
+  styleUrls: ['./slideshow-col.component.scss'],
 })
-export class SlideshowBackdropComponent implements OnInit {
+export class SlideshowColComponent implements OnInit {
   @Input() title = '';
   @Input() movies: Movie[] = [];
-
   slidesOptions = {
-    slidesPerView: 1.1,
+    slidesPerView: 3.3,
     freeMode: true,
+    spaceBetween: -8,
   };
 
   constructor() { }
