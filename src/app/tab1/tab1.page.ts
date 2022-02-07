@@ -9,6 +9,7 @@ import { Movie } from '../interfaces/movie.interfaces';
 })
 export class Tab1Page implements OnInit {
   latestMovies: Movie[] = [];
+  popularMovies: Movie[] = [];
 
   constructor(private _moviesService: MoviesService) {}
 
@@ -16,5 +17,9 @@ export class Tab1Page implements OnInit {
     this._moviesService
       .getFeatures()
       .subscribe(({ results }) => (this.latestMovies = results));
+
+    this._moviesService
+      .getPopularMovies()
+      .subscribe(({ results }) => (this.popularMovies = results));
   }
 }

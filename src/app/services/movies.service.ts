@@ -35,6 +35,10 @@ export class MoviesService {
     );
   }
 
+  getPopularMovies() {
+    return this._executeQuery<MoviesResponse>(`/discover/movie?sort_by=popularity.desc`)
+  }
+
   private _executeQuery<T>(query: string) {
     return this._http.get<T>(`${api_url}${query}`, {
       params: {

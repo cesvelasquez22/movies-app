@@ -7,6 +7,7 @@ import { Movie } from 'src/app/interfaces/movie.interfaces';
   styleUrls: ['./slideshow-backdrop.component.scss'],
 })
 export class SlideshowBackdropComponent implements OnInit {
+  @Input() title = '';
   @Input() movies: Movie[] = [];
 
   slidesOptions = {

@@ -7,6 +7,7 @@ import { Movie } from 'src/app/interfaces/movie.interfaces';
   styleUrls: ['./slideshow-poster.component.scss'],
 })
 export class SlideshowPosterComponent implements OnInit {
+  @Input() title = '';
   @Input() movies: Movie[] = [];
   slidesOptions = {
     slidesPerView: 3.3,
