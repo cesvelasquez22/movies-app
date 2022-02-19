@@ -1,3 +1,4 @@
 <ion-card>
-  <img [src]="movie[pathType] | image" [ngClass]="{'poster': pathType === 'poster_path'}">
+  <!-- <img [src]="movie[pathType] | image" [ngClass]="{'poster': pathType === 'poster_path'}"> -->
+  <ion-img [src]="movie[pathType] | image" [ngClass]="{'poster': pathType === 'poster_path'}"></ion-img>
 </ion-card>

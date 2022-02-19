@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { MoviesResponse } from '../interfaces/movie.interfaces';
+import { Movie, MoviesResponse } from '../interfaces/movie.interfaces';
 
 const api_url = environment.MDB_API;
 const api_key = environment.API_KEY;
@@ -19,9 +21,18 @@ const last_day = new Date(
   providedIn: 'root',
 })
 export class MoviesService {
+  
+  private _popularsPage = 0;
+  private _popularMovies = new BehaviorSubject<Movie[]>([]);
+  public popularMovies$ = this._popularMovies.asObservable();
+
   constructor(private _http: HttpClient) {}
 
-  getFeatures() {
+  private get popularMovies() {
+    return this._popularMovies.value;
+  }
+
+  getLatestMovies() {
     let currentMonth;
     if (month < 10) {
       currentMonth = `0${month}`;
@@ -36,7 +47,10 @@ export class MoviesService {
   }
 
   getPopularMovies() {
-    return this._executeQuery<MoviesResponse>(`/discover/movie?sort_by=popularity.desc`)
+    this._popularsPage++;
+    return this._executeQuery<MoviesResponse>(
+      `/discover/movie?sort_by=popularity.desc&page=${this._popularsPage}`
+    ).pipe(tap(({ results }) => this._nextPopularMovies(results)));
   }
 
   private _executeQuery<T>(query: string) {
@@ -47,5 +61,9 @@ export class MoviesService {
         include_image_language,
       },
     });
+  }
+
+  private _nextPopularMovies(movies: Movie[]) {
+    this._popularMovies.next([...this.popularMovies, ...movies]);
   }
 }

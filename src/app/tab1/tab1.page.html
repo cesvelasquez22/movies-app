@@ -1,9 +1,12 @@
 <ion-content [fullscreen]="true">
 
-  <app-slideshow-backdrop title="Películas nuevas" [movies]="latestMovies"></app-slideshow-backdrop>
+  <app-slideshow-backdrop *ngIf="latestMovies$ | async as latestMovies" title="Películas nuevas"
+    [movies]="latestMovies"></app-slideshow-backdrop>
 
-  <app-slideshow-poster title="Cartelera" [movies]="latestMovies"></app-slideshow-poster>
+  <app-slideshow-poster *ngIf="latestMovies$ | async as latestMovies" title="Cartelera" [movies]="latestMovies">
+  </app-slideshow-poster>
 
-  <app-slideshow-col title="Populares" [movies]="popularMovies"></app-slideshow-col>
+  <app-slideshow-col *ngIf="popularMovies$ | async as popularMovies" title="Populares" [movies]="popularMovies"
+    (loadMore)="loadMore()"></app-slideshow-col>
 
 </ion-content>

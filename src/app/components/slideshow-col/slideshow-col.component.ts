@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Movie } from '@interfaces';
 
 @Component({
@@ -9,6 +9,7 @@ import { Movie } from '@interfaces';
 export class SlideshowColComponent implements OnInit {
   @Input() title = '';
   @Input() movies: Movie[] = [];
+  @Output() loadMore = new EventEmitter();
   slidesOptions = {
     slidesPerView: 3.3,
     freeMode: true,
@@ -18,5 +19,9 @@ export class SlideshowColComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+
+  onClick() {
+    this.loadMore.emit();
+  }
 
 }
