@@ -7,6 +7,7 @@ import { SlideshowPosterComponent } from './slideshow-poster/slideshow-poster.co
 import { SlideComponent } from './slide/slide.component';
 import { HeaderComponent } from './header/header.component';
 import { SlideshowColComponent } from './slideshow-col/slideshow-col.component';
+import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SlideshowColComponent } from './slideshow-col/slideshow-col.component';
     SlideComponent,
     HeaderComponent,
     SlideshowColComponent,
+    DetailComponent,
   ],
   exports: [
     SlideshowBackdropComponent,

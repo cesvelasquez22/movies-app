@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Movie } from 'src/app/interfaces/movie.interfaces';
+import { DetailComponent } from '../detail/detail.component';
 
 @Component({
   selector: 'app-slide',
@@ -10,8 +12,18 @@ export class SlideComponent implements OnInit {
   @Input() movie: Movie;
   @Input() pathType = 'backdrop_path';
 
-  constructor() { }
+  constructor(private _modalController: ModalController) {}
 
   ngOnInit() {}
 
+  async onClick() {
+    const modal = await this._modalController.create({
+      component: DetailComponent,
+      componentProps: {
+        id: this.movie.id,
+      },
+    });
+
+    modal.present();
+  }
 }
