@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Movie, MoviesResponse } from '../interfaces/movie.interfaces';
+import {
+  Movie,
+  MovieCredits,
+  MovieDetail,
+  MoviesResponse,
+} from '../interfaces/movie.interfaces';
 
 const api_url = environment.MDB_API;
 const api_key = environment.API_KEY;
@@ -21,7 +26,6 @@ const last_day = new Date(
   providedIn: 'root',
 })
 export class MoviesService {
-  
   private _popularsPage = 0;
   private _popularMovies = new BehaviorSubject<Movie[]>([]);
   public popularMovies$ = this._popularMovies.asObservable();
@@ -51,6 +55,14 @@ export class MoviesService {
     return this._executeQuery<MoviesResponse>(
       `/discover/movie?sort_by=popularity.desc&page=${this._popularsPage}`
     ).pipe(tap(({ results }) => this._nextPopularMovies(results)));
+  }
+
+  getMovieDetail(id: number) {
+    return this._executeQuery<MovieDetail>(`/movie/${id}`);
+  }
+
+  getMovieCredits(id: number) {
+    return this._executeQuery<MovieCredits>(`/movie/${id}/credits`);
   }
 
   private _executeQuery<T>(query: string) {
