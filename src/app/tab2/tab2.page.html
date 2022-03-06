@@ -22,7 +22,7 @@
   <ion-list>
     <ion-list-header>
       <ion-label>Populares</ion-label>
-      <ion-button>Ver todos</ion-button>
+      <ion-button routerLink="/populars">Ver todos</ion-button>
     </ion-list-header>
     <ion-item *ngFor="let movie of populars$ | async" (click)="onClick(movie.title)">
       <ion-label>{{ movie.title }}</ion-label>

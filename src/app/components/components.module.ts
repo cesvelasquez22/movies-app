@@ -22,6 +22,7 @@ import { DetailComponent } from './detail/detail.component';
     SlideshowBackdropComponent,
     SlideshowPosterComponent,
     SlideshowColComponent,
+    SlideComponent,
   ],
   imports: [CommonModule, IonicModule, PipesModule],
 })
