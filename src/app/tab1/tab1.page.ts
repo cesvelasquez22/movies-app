@@ -13,12 +13,13 @@ export class Tab1Page implements OnInit {
   latestMovies$: Observable<Movie[]>;
   popularMovies$: Observable<Movie[]>;
 
-  constructor(private _moviesService: MoviesService) {}
+  constructor(private _moviesService: MoviesService) {
+    this._moviesService.resetPopularMovies();
+  }
 
   ngOnInit(): void {
-    this.latestMovies$ = this._moviesService
-      .getLatestMovies()
-      .pipe(map(({ results }) => results));
+    this.latestMovies$ = this._moviesService.latestMovies$;
+    this._moviesService.getLatestMovies().subscribe();
 
     this.popularMovies$ = this._moviesService.popularMovies$;
     this._getPopularMovies();

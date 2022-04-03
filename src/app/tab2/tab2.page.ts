@@ -12,8 +12,10 @@ export class Tab2Page implements OnInit {
   populars$: Observable<Movie[]>;
   search = '';
   searching = false;
-  
-  constructor(private _moviesService: MoviesService) {}
+
+  constructor(private _moviesService: MoviesService) {
+    this._moviesService.resetPopularMovies();
+  }
 
   ngOnInit(): void {
     this.populars$ = this._moviesService.popularMovies$;
@@ -21,8 +23,10 @@ export class Tab2Page implements OnInit {
   }
 
   onSearchChange(event) {
-    const value = event.detail.value;
-    console.log(value);
+    const search = event.detail.value;
+    if (search.length > 0) {
+      this._moviesService.searchMovies(search).subscribe(console.log);
+    }
   }
 
   onClick(value: string) {

@@ -1,15 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import {
-  Movie,
-  MovieCredits,
-  MovieDetail,
-  MoviesResponse,
-  GenresResponse,
-} from '@interfaces';
+import { Movie, MovieCredits, MovieDetail, MoviesResponse } from '@interfaces';
 
 const api_url = environment.MDB_API;
 const api_key = environment.API_KEY;
@@ -31,10 +25,18 @@ export class MoviesService {
   private _popularMovies = new BehaviorSubject<Movie[]>([]);
   public popularMovies$ = this._popularMovies.asObservable();
 
+  private _latestMovies = new BehaviorSubject<Movie[]>([]);
+  public latestMovies$ = this._latestMovies.asObservable();
+
   constructor(private _http: HttpClient) {}
 
   private get popularMovies() {
     return this._popularMovies.value;
+  }
+
+  resetPopularMovies() {
+    this._popularsPage = 0;
+    this._popularMovies.next([]);
   }
 
   getLatestMovies() {
@@ -48,7 +50,7 @@ export class MoviesService {
     const toDate = `${today.getFullYear()}-${currentMonth}-${last_day}`;
     return this._executeQuery<MoviesResponse>(
       `/discover/movie?primary_release_date.gte=${fromDate}&primary_release_date.lte=${toDate}`
-    );
+    ).pipe(tap(({ results }) => this._latestMovies.next(results)));
   }
 
   getPopularMovies() {
@@ -66,9 +68,9 @@ export class MoviesService {
     return this._executeQuery<MovieCredits>(`/movie/${id}/credits`);
   }
 
-  getGenres() {
-    return this._executeQuery<GenresResponse>(`/genre/movie/list`).pipe(
-      map(({ genres }) => genres)
+  searchMovies(search: string) {
+    return this._executeQuery<MoviesResponse[]>(
+      `/search/movie?query=${search}`
     );
   }
 

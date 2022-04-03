@@ -37,7 +37,10 @@
           }
         ],
         "no-underscore-dangle": "off",
-        "max-len": "off"
+        "max-len": "off",
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/no-unused-vars": ["warn"]
       }
     },
     {
