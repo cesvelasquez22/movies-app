@@ -1,4 +1,5 @@
 <ion-card (click)="onClick()">
   <!-- <img [src]="movie[pathType] | image" [ngClass]="{'poster': pathType === 'poster_path'}"> -->
-  <ion-img [src]="movie[pathType] | image" [ngClass]="{'poster': pathType === 'poster_path'}"></ion-img>
+  <ion-img [src]="movie[pathType] | image"></ion-img>
+  <ng-content select="[slideDescription]"></ng-content>
 </ion-card>

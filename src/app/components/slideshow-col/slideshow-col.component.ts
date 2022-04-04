@@ -11,7 +11,7 @@ export class SlideshowColComponent implements OnInit {
   @Input() movies: Movie[] = [];
   @Output() loadMore = new EventEmitter();
   slidesOptions = {
-    slidesPerView: 3.3,
+    slidesPerView: 3.5,
     freeMode: true,
     spaceBetween: -8,
   };

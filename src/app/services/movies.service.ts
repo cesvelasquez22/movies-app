@@ -69,7 +69,7 @@ export class MoviesService {
   }
 
   searchMovies(search: string) {
-    return this._executeQuery<MoviesResponse[]>(
+    return this._executeQuery<MoviesResponse>(
       `/search/movie?query=${search}`
     );
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '@services';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { Movie } from '../interfaces/movie.interfaces';
 
 @Component({
@@ -11,7 +12,9 @@ import { Movie } from '../interfaces/movie.interfaces';
 export class Tab2Page implements OnInit {
   populars$: Observable<Movie[]>;
   search = '';
-  searching = false;
+  isSearching = false;
+
+  movies: Movie[] = [];
 
   constructor(private _moviesService: MoviesService) {
     this._moviesService.resetPopularMovies();
@@ -23,9 +26,18 @@ export class Tab2Page implements OnInit {
   }
 
   onSearchChange(event) {
+    this.isSearching = true;
     const search = event.detail.value;
     if (search.length > 0) {
-      this._moviesService.searchMovies(search).subscribe(console.log);
+      this._moviesService
+        .searchMovies(search)
+        .pipe(finalize(() => (this.isSearching = false)))
+        .subscribe(({ results }) => {
+          this.movies = results;
+        });
+    } else {
+      this.movies = [];
+      this.isSearching = false;
     }
   }
 

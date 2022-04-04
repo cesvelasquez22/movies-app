@@ -9,9 +9,9 @@ import { Movie } from '@interfaces';
 export class SlideshowPosterComponent implements OnInit {
   @Input() title = '';
   @Input() movies: Movie[] = [];
-  
+
   slidesOptions = {
-    slidesPerView: 3.3,
+    slidesPerView: 3.5,
     freeMode: true,
   };
 

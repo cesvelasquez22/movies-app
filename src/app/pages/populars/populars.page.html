@@ -11,7 +11,14 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6" sizeSm="4" sizeMd="3" sizeLg="2" *ngFor="let movie of popularMovies$ | async">
-        <app-slide [movie]="movie" pathType="poster_path"></app-slide>
+        <app-slide [movie]="movie" pathType="poster_path">
+          <ng-container slideDescription>
+            <ion-card-header>
+              <ion-card-subtitle>{{ movie.release_date | date:'YYYY' }}</ion-card-subtitle>
+              <ion-card-title>{{ movie.title }}</ion-card-title>
+            </ion-card-header>
+          </ng-container>
+        </app-slide>
       </ion-col>
     </ion-row>
   </ion-grid>
