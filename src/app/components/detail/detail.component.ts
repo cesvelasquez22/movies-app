@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Cast, MovieDetail } from '@interfaces';
 import { ModalController } from '@ionic/angular';
-import { MoviesService } from '@services';
+import { MoviesService, StorageService } from '@services';
 
 @Component({
   selector: 'app-detail',
@@ -20,7 +20,9 @@ export class DetailComponent implements OnInit {
     freeMode: true,
   };
 
-  constructor(private _moviesService: MoviesService, private modalController: ModalController) {}
+  public readonly existsMovieAtFavorites = (id: number) => this._storageService.existsMovieAtFavorites(id);
+
+  constructor(private _moviesService: MoviesService, private modalController: ModalController, private _storageService: StorageService) {}
 
   ngOnInit() {
     this._moviesService
@@ -33,5 +35,9 @@ export class DetailComponent implements OnInit {
 
   back() {
     this.modalController.dismiss();
+  }
+
+  favorite() {
+    this._storageService.saveOrRemoveMovie(this.movieDetail);
   }
 }
