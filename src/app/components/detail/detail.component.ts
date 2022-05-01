@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Cast, MovieDetail } from '@interfaces';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { MoviesService, StorageService } from '@services';
 
 @Component({
@@ -20,9 +20,15 @@ export class DetailComponent implements OnInit {
     freeMode: true,
   };
 
-  public readonly existsMovieAtFavorites = (id: number) => this._storageService.existsMovieAtFavorites(id);
+  public readonly existsMovieAtFavorites = (id: number) =>
+    this._storageService.existsMovieAtFavorites(id);
 
-  constructor(private _moviesService: MoviesService, private modalController: ModalController, private _storageService: StorageService) {}
+  constructor(
+    private _moviesService: MoviesService,
+    private modalController: ModalController,
+    private _storageService: StorageService,
+    private _toastController: ToastController
+  ) {}
 
   ngOnInit() {
     this._moviesService
@@ -39,5 +45,21 @@ export class DetailComponent implements OnInit {
 
   favorite() {
     this._storageService.saveOrRemoveMovie(this.movieDetail);
+
+    const isFavorite = this.existsMovieAtFavorites(this.id);
+    if (isFavorite) {
+      this.presentToast('Película agregada a favoritos');
+    } else {
+      this.presentToast('Película removida de favoritos');
+    }
+  }
+
+  private async presentToast(message: string) {
+    const toast = await this._toastController.create({
+      message,
+      duration: 2000,
+      mode: 'ios',
+    });
+    toast.present();
   }
 }
