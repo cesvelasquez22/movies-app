@@ -23,6 +23,7 @@ import { DetailComponent } from './detail/detail.component';
     SlideshowPosterComponent,
     SlideshowColComponent,
     SlideComponent,
+    HeaderComponent,
   ],
   imports: [CommonModule, IonicModule, PipesModule],
 })
