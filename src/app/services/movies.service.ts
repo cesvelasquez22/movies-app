@@ -1,9 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Movie, MovieCredits, MovieDetail, MoviesResponse } from '@interfaces';
+import {
+  GenresResponse,
+  Movie,
+  MovieCredits,
+  MovieDetail,
+  MoviesResponse,
+} from '@interfaces';
 
 const api_url = environment.MDB_API;
 const api_key = environment.API_KEY;
@@ -69,8 +75,12 @@ export class MoviesService {
   }
 
   searchMovies(search: string) {
-    return this._executeQuery<MoviesResponse>(
-      `/search/movie?query=${search}`
+    return this._executeQuery<MoviesResponse>(`/search/movie?query=${search}`);
+  }
+
+  getGenres() {
+    return this._executeQuery<GenresResponse>(`/genre/movie/list`).pipe(
+      map(({ genres }) => genres)
     );
   }
 
