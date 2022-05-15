@@ -8,7 +8,7 @@
 
 <ion-toolbar>
   <ion-searchbar placeholder="Buscar película" (ionChange)="onSearchChange($event)" [debounce]="700" animated
-    [value]="search">
+    [value]="search" [showCancelButton]="'focus'">
   </ion-searchbar>
 </ion-toolbar>
 

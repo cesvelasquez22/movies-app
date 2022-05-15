@@ -25,8 +25,13 @@
           </ng-container>
         </app-slide>
       </ion-col>
-      <ion-col *ngIf="perGenres.length === 0">
+      <ion-col *ngIf="selectedGenre && perGenres.length === 0">
         <h4> No hay películas de "{{ selectedGenre?.name }}" en tus favoritos </h4>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="movies.length === 0">
+      <ion-col size="12">
+        <h4>Sin favoritos por aquí</h4>
       </ion-col>
     </ion-row>
   </ion-grid>
